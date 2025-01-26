@@ -4,47 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.json">
   <title>ChatGPT PWA</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #343541;
+      color: #d1d5db;
       text-align: center;
-      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+    small {
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+    .spinner {
+      margin: 1rem 0;
+      border: 4px solid #555;
+      border-top: 4px solid #10a37f;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
     .install-message {
+      margin-top: 2rem;
       max-width: 400px;
-      margin: auto;
       padding: 1rem;
-      border: 1px solid #ccc;
+      border: 1px solid #555;
       border-radius: 8px;
-      background: #f9f9f9;
-    }
-    .install-message h1 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .install-message p {
-      font-size: 1rem;
-      margin-bottom: 1rem;
+      background: #444654;
     }
   </style>
 </head>
 <body>
   <div id="app">
-    <div class="install-message" id="installMessage">
-      <h1>Установите приложение</h1>
-      <p>Чтобы использовать ChatGPT как приложение, установите его на ваш домашний экран.</p>
+    <h1>ChatGPT is loading...</h1>
+    <div class="spinner"></div>
+    <div id="installMessage" class="install-message" style="display: none;">
+      <p>If ChatGPT does not open automatically, please install this app on your device for the best experience.</p>
+      <small>To install, use your browser's "Add to Home Screen" or equivalent option.</small>
     </div>
   </div>
 
   <script>
-    // Проверяем, запущено ли PWA как установленное приложение
+    // Check if the app is running as a PWA
     if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
-      // Если PWA запущено как приложение, делаем редирект
+      // If in PWA mode, redirect to ChatGPT
       window.location.href = 'https://chat.openai.com';
     } else {
-      // Если в браузере, показываем сообщение
+      // If in browser mode, show the installation message
       document.getElementById('installMessage').style.display = 'block';
     }
   </script>
