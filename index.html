@@ -1,91 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="manifest" href="./manifest.json">
-  <title>ChatGPT PWA</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #343541;
-      color: #d1d5db;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .container {
-      text-align: center;
-      max-width: 300px;
-    }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-    p {
-      font-size: 1rem;
-      margin: 0.5rem 0;
-    }
-    small {
-      color: #9ca3af;
-      font-size: 0.9rem;
-    }
-    .spinner {
-      margin: 1rem auto;
-      border: 4px solid #555;
-      border-top: 4px solid #10a37f;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-    .install-message {
-      max-width: 400px;
-      padding: 1rem;
-      border: 1px solid #555;
-      border-radius: 8px;
-      background: #444654;
-    }
-  </style>
-</head>
-<body>
-  <div id="app" class="container">
-    <!-- Эти элементы скрываются и показываются в зависимости от режима -->
-    <div id="pwaMessage" style="display: none;">
-      <h1>ChatGPT is loading...</h1>
-      <div class="spinner"></div>
-    </div>
-    <div id="installMessage" class="install-message" style="display: none;">
-      <h1>Install ChatGPT</h1>
-      <p>If ChatGPT does not open automatically, install this app on your device for the best experience.</p>
-      <small>To install, use your browser's "Add to Home Screen" or equivalent option.</small>
-    </div>
-  </div>
-
-  <script>
-    // Проверяем, запущено ли PWA как приложение
-    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
-      // Если PWA запущено, показываем сообщение "загрузка" и редиректим
-      document.getElementById('pwaMessage').style.display = 'block';
-      setTimeout(() => {
-        window.location.href = 'https://chat.openai.com';
-      }, 1000); // Задержка в 1 секунду для анимации
-    } else {
-      // Если открыто в браузере, показываем сообщение об установке
-      document.getElementById('installMessage').style.display = 'block';
-    }
-  </script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="manifest" href="./manifest.json" />
+        <title>ChatGPT PWA</title>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+            .chatgpt-iframe {
+                border: none;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <iframe class="chatgpt-iframe" src="https://chat.openai.com"></iframe>
+    </body>
+    <script>
+        function resizeIframe() {
+            var iframe = document.querySelector(".chatgpt-iframe");
+            iframe.style.height = window.innerHeight + "px";
+        }
+        window.addEventListener("resize", resizeIframe);
+        resizeIframe();
+    </script>
 </html>
