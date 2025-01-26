@@ -7,26 +7,45 @@
   <link rel="manifest" href="manifest.json">
   <title>ChatGPT PWA</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
     }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
+    .install-message {
+      max-width: 400px;
+      margin: auto;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .install-message h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .install-message p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-  <iframe src="https://chat.openai.com" title="ChatGPT"></iframe>
+  <div id="app">
+    <div class="install-message" id="installMessage">
+      <h1>Установите приложение</h1>
+      <p>Чтобы использовать ChatGPT как приложение, установите его на ваш домашний экран.</p>
+    </div>
+  </div>
+
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js').then(() => {
-        console.log('Service Worker registered successfully.');
-      }).catch(console.error);
+    // Проверяем, запущено ли PWA как установленное приложение
+    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+      // Если PWA запущено как приложение, делаем редирект
+      window.location.href = 'https://chat.openai.com';
+    } else {
+      // Если в браузере, показываем сообщение
+      document.getElementById('installMessage').style.display = 'block';
     }
   </script>
 </body>
