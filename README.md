@@ -7,3 +7,6 @@ This is a simple wrapper for ChatGPT, created to open the ChatGPT page separatel
 2. Tap the **Share** button (the square with an arrow).  
 3. Select **Add to Home Screen** from the menu.  
 4. Open the app from your home screen and enjoy!
+
+## Example Screenshot:
+<div align="center"> <img src="assets/screenshot.webp" alt="Screenshot of ChatGPT PWA" style="height: 700px; border-radius: 8px;"> </div>
