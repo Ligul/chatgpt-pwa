@@ -2,7 +2,7 @@
   "name": "ChatGPT PWA",
   "short_name": "ChatGPT",
   "description": "Wrapper for ChatGPT website",
-  "start_url": "/",
+  "start_url": "https://chat.openai.com",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
